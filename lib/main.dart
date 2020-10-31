@@ -30,10 +30,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // void _incrementCounter() {
-  //   setState(() {});
-  // }
-
   bool isStart = false;
   var assetsAudioPlayer = AssetsAudioPlayer();
 
@@ -47,6 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Padding(padding: EdgeInsets.only(top: 10.0)),
             ButtonTheme(
               height: 250,
               minWidth: 250,
@@ -85,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
-            Padding(padding: EdgeInsets.only(top: 100.0)),
+            Padding(padding: EdgeInsets.only(top: 50.0)),
             Text(
               "v1.0.0\n© 2020  Osman KOÇ",
               textAlign: TextAlign.center,
