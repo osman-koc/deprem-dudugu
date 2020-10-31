@@ -1,3 +1,4 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -34,6 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
   // }
 
   bool isStart = false;
+  var assetsAudioPlayer = AssetsAudioPlayer();
 
   @override
   Widget build(BuildContext context) {
@@ -52,11 +54,27 @@ class _MyHomePageState extends State<MyHomePage> {
                   borderRadius: BorderRadius.circular(100)),
               child: RaisedButton(
                 color: isStart ? Colors.grey : Colors.red,
-                onPressed: () => setState(() => isStart = !isStart),
+                onPressed: () => setState(() {
+                  isStart = !isStart;
+                  if (isStart) {
+                    assetsAudioPlayer.open(
+                      Audio("assets/audios/referee-whistle.mp3"),
+                      autoStart: true,
+                      showNotification: false,
+                      loopMode: LoopMode.single,
+                    );
+                  } else {
+                    assetsAudioPlayer.stop();
+                  }
+                }),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(isStart ? 'assets/img/whistle-01.png' : 'assets/img/whistle-01-noclick.png', width: 160),
+                    Image.asset(
+                        isStart
+                            ? 'assets/img/whistle-01.png'
+                            : 'assets/img/whistle-01-noclick.png',
+                        width: 160),
                     Text("S.O.S", style: TextStyle(color: Colors.white))
                   ],
                 ),
@@ -65,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               '\n\nYardım için düdüğe basın.\nDurdurmak için tekrar basın.',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
           ],
         ),
