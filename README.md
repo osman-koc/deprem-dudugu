@@ -12,3 +12,4 @@ Kaynak linkler aşağıdaki gibidir.
 - [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 - [Online Documentation](https://flutter.dev/docs)
 - [Audio Player](https://pub.dev/packages/assets_audio_player)
+- [Launcher Icons](https://pub.dev/packages/flutter_launcher_icons)
