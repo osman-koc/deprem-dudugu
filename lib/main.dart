@@ -83,7 +83,16 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               '\n\nYardım için düdüğe basın.\nDurdurmak için tekrar basın.',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            ),
+            Padding(padding: EdgeInsets.only(top: 100.0)),
+            Text(
+              "v1.0.0\n© 2020  Osman KOÇ",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.black87,
+                fontSize: 11.0,
+              ),
             ),
           ],
         ),
