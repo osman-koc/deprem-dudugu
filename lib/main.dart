@@ -1,5 +1,9 @@
-import 'package:assets_audio_player/assets_audio_player.dart';
+import 'dart:io';
+
+import 'package:audioplayer/audioplayer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:path_provider/path_provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,33 +35,43 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var isStart = false;
-  var assetsAudioPlayer = AssetsAudioPlayer();
+  AudioPlayer audioPlayer = new AudioPlayer();
 
   int selectedVoiceIndex = 0;
-  var voiceNames = <String>[
+  final voiceNames = <String>[
     'Düdük sesi',
     'Kedi sesi',
     'Siren sesi',
     'Mors alfabesi yardım sesi'
   ];
-  var voiceUrls = <String>[
-    'assets/audios/referee-whistle.mp3',
-    'assets/audios/cat-meow.mp3',
-    'assets/audios/siren.mp3',
-    'assets/audios/morse-sos.mp3'
+  final voiceUrls = <String>[
+    'referee-whistle.mp3',
+    'cat-meow.mp3',
+    'siren.mp3',
+    'morse-sos.mp3'
   ];
+
+  final imgActive = 'assets/img/whistle-01.png';
+  final imgPassive = 'assets/img/whistle-01-noclick.png';
 
   void playVoice() {
     if (isStart) {
-      assetsAudioPlayer.open(
-        Audio(voiceUrls[selectedVoiceIndex]),
-        autoStart: true,
-        showNotification: false,
-        loopMode: LoopMode.single,
-      );
+      playLocal(voiceUrls[selectedVoiceIndex]).then((value) => (null));
     } else {
-      assetsAudioPlayer.stop();
+      audioPlayer.stop();
     }
+  }
+
+  Future playLocal(localFileName) async {
+    audioPlayer.stop();
+    final dir = await getApplicationDocumentsDirectory();
+    final file = new File("${dir.path}/$localFileName");
+    if (!(await file.exists())) {
+      final soundData = await rootBundle.load("assets/audios/$localFileName");
+      final bytes = soundData.buffer.asUint8List();
+      await file.writeAsBytes(bytes, flush: true);
+    }
+    await audioPlayer.play(file.path, isLocal: true);
   }
 
   @override
@@ -70,9 +84,8 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            //Padding(padding: EdgeInsets.only(top: 10.0)),
             ButtonTheme(
-              padding: EdgeInsets.all(50.0),
+              padding: EdgeInsets.all(40.0),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100)),
               child: RaisedButton(
@@ -84,11 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(
-                        isStart
-                            ? 'assets/img/whistle-01.png'
-                            : 'assets/img/whistle-01-noclick.png',
-                        width: 160),
+                    Image.asset(isStart ? imgActive : imgPassive, width: 160),
                     Text("S.O.S", style: TextStyle(color: Colors.white))
                   ],
                 ),
