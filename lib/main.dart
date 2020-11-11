@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:audioplayer/audioplayer.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:path_provider/path_provider.dart';
@@ -54,24 +54,27 @@ class _MyHomePageState extends State<MyHomePage> {
   final imgActive = 'assets/img/whistle-01.png';
   final imgPassive = 'assets/img/whistle-01-noclick.png';
 
-  void playVoice() {
-    if (isStart) {
-      playLocal(voiceUrls[selectedVoiceIndex]).then((value) => (null));
-    } else {
-      audioPlayer.stop();
-    }
+  @override
+  void initState() {
+    isStart = audioPlayer.state == AudioPlayerState.PLAYING;
+    super.initState();
   }
 
   Future playLocal(localFileName) async {
-    audioPlayer.stop();
-    final dir = await getApplicationDocumentsDirectory();
-    final file = new File("${dir.path}/$localFileName");
-    if (!(await file.exists())) {
-      final soundData = await rootBundle.load("assets/audios/$localFileName");
-      final bytes = soundData.buffer.asUint8List();
-      await file.writeAsBytes(bytes, flush: true);
+    if (!isStart) {
+      await audioPlayer.stop();
+    } else {
+      final dir = await getApplicationDocumentsDirectory();
+      final file = new File("${dir.path}/$localFileName");
+      if (!(await file.exists())) {
+        final soundData = await rootBundle.load("assets/audios/$localFileName");
+        final bytes = soundData.buffer.asUint8List();
+        await file.writeAsBytes(bytes, flush: true);
+      }
+      await audioPlayer.setUrl(file.path, isLocal: true);
+      await audioPlayer.setReleaseMode(ReleaseMode.LOOP);
+      await audioPlayer.resume();
     }
-    await audioPlayer.play(file.path, isLocal: true);
   }
 
   @override
@@ -92,7 +95,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: isStart ? Colors.grey : Colors.red,
                 onPressed: () => setState(() {
                   isStart = !isStart;
-                  playVoice();
+                  playLocal(voiceUrls[selectedVoiceIndex])
+                      .then((value) => (null));
                 }),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -117,7 +121,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   setState(() {
                     selectedVoiceIndex = voiceNames.indexOf(value);
                     isStart = false;
-                    playVoice();
+                    playLocal(voiceUrls[selectedVoiceIndex])
+                        .then((value) => (null));
                   });
                 },
                 style: TextStyle(color: Colors.black87, fontSize: 20),

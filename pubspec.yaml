@@ -3,7 +3,7 @@ description: Yardım için düdük çalar.
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 1.2.0+3
+version: 1.2.1+4
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -11,7 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  audioplayer: ^0.8.1
+  audioplayers: ^0.16.2
   cupertino_icons: ^1.0.0
   flutter_launcher_icons: ^0.8.1
   path_provider: ^1.6.24

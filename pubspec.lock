@@ -22,13 +22,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.2"
-  audioplayer:
+  audioplayers:
     dependency: "direct main"
     description:
-      name: audioplayer
+      name: audioplayers
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.8.1"
+    version: "0.16.2"
   boolean_selector:
     dependency: transitive
     description:
@@ -120,6 +120,11 @@ packages:
     version: "0.8.1"
   flutter_test:
     dependency: "direct dev"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
+  flutter_web_plugins:
+    dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
@@ -275,6 +280,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
+  uuid:
+    dependency: transitive
+    description:
+      name: uuid
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.2"
   vector_math:
     dependency: transitive
     description:

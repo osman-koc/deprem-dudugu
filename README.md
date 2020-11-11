@@ -11,5 +11,6 @@ Kaynak linkler aşağıdaki gibidir.
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 - [Online Documentation](https://flutter.dev/docs)
-- [Audio Player](https://pub.dev/packages/assets_audio_player)
 - [Launcher Icons](https://pub.dev/packages/flutter_launcher_icons)
+- [Audio Players](https://pub.dev/packages/audioplayers)
+- [Path Provider](https://pub.dev/packages/path_provider)
