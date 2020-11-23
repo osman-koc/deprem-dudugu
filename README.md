@@ -23,13 +23,13 @@ Kaynak linkler aşağıdaki gibidir.
 - [Audio Players](https://pub.dev/packages/audioplayers)
 - [Path Provider](https://pub.dev/packages/path_provider)
 
-# Gereksinimler
+## Gereksinimler
 - [VS Code](https://code.visualstudio.com)
 - [Flutter](https://flutter.dev/docs/get-started/install)
 - [Dart SDK](https://dart.dev/get-dart)
 - [Android Studio Emulator](https://developer.android.com/studio#downloads)
 
-## Kurulum
+### Projeyi Çalıştırma
 
 VS Code terminal:
 - flutter pub get
