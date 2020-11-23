@@ -6,11 +6,11 @@ Deprem anında enkaz altında ses duyurmak için düdük sesi çalmaya yarayan m
 
 - [Market indirme linki (download)](https://play.google.com/store/apps/details?id=com.osmankoc.DepremDudugu)
 
-![](https://play-lh.googleusercontent.com/Oy5Z6hb7Q-IUd83TGTGD8RZlGGacijXCq_k05hlHoBa-a3iNBAa9IsL02xaif_eECYtP=w1536-h722-rw)
-
-![](https://play-lh.googleusercontent.com/qaqVvrp1RjcJQtQPoSXQRaFtnvA-uLam1cFvi7yBxnuegt_pX5VnWq2xezVozEq9RxGT=w1536-h722-rw)
-
-![](https://play-lh.googleusercontent.com/C5NwNaI2A0dbEmzEkj2SBlx4skTRhK0PF7NnBQN5V7e8GRnTiRQIAbx5UlIIZrCxfw4=w1536-h722-rw)
+<div class="row">
+  <img src="https://play-lh.googleusercontent.com/Oy5Z6hb7Q-IUd83TGTGD8RZlGGacijXCq_k05hlHoBa-a3iNBAa9IsL02xaif_eECYtP=w1536-h722-rw" width="200" />
+  <img src="https://play-lh.googleusercontent.com/qaqVvrp1RjcJQtQPoSXQRaFtnvA-uLam1cFvi7yBxnuegt_pX5VnWq2xezVozEq9RxGT=w1536-h722-rw" width="200" />
+  <img src="https://play-lh.googleusercontent.com/C5NwNaI2A0dbEmzEkj2SBlx4skTRhK0PF7NnBQN5V7e8GRnTiRQIAbx5UlIIZrCxfw4=w1536-h722-rw" width="200" />
+</div>
 
 ## Teknik
 
