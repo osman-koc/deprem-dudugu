@@ -22,3 +22,15 @@ Kaynak linkler aşağıdaki gibidir.
 - [Launcher Icons](https://pub.dev/packages/flutter_launcher_icons)
 - [Audio Players](https://pub.dev/packages/audioplayers)
 - [Path Provider](https://pub.dev/packages/path_provider)
+
+# Gereksinimler
+- [VS Code](https://code.visualstudio.com)
+- [Flutter](https://flutter.dev/docs/get-started/install)
+- [Dart SDK](https://dart.dev/get-dart)
+- [Android Studio Emulator](https://developer.android.com/studio#downloads)
+
+## Kurulum
+
+VS Code terminal:
+- flutter pub get
+- flutter run
