@@ -1,0 +1,11 @@
+{
+    "appName": "Whistle",
+    "audio_whistle": "Whistle",
+    "audio_cat": "Cat",
+    "audio_siren": "Siren",
+    "audio_morse": "Morse",
+    "pressForHelp": "Press the whistle for help.",
+    "pressForStop": "Press it again to stop.",
+    "sos": "S.O.S",
+    "copyright": "© 2021 Osman KOÇ \n osmkoc.com"
+}

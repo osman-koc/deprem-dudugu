@@ -1,9 +1,13 @@
 import 'dart:io';
 
+import 'package:DepremDudugu/constants/const_asset.dart';
+import 'package:DepremDudugu/constants/const_voice.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'app_localizations.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,16 +22,32 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Deprem Düdüğü'),
       debugShowCheckedModeBanner: false,
+      supportedLocales: [
+        Locale('en', 'US'),
+        Locale('tr', 'TR'),
+      ],
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      localeResolutionCallback: (locale, supportedLocales) {
+        for (var supportedLocale in supportedLocales) {
+          if (supportedLocale.languageCode == locale.languageCode &&
+              supportedLocale.countryCode == locale.countryCode) {
+            return supportedLocale;
+          }
+        }
+        return supportedLocales.first;
+      },
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
+  MyHomePage({Key key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -35,29 +55,17 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var isStart = false;
-  AudioPlayer audioPlayer = new AudioPlayer();
+  var audioPlayer = new AudioPlayer();
 
   int selectedVoiceIndex = 0;
-  final voiceNames = <String>[
-    'Düdük sesi',
-    'Kedi sesi',
-    'Siren sesi',
-    'Mors alfabesi yardım sesi'
-  ];
-  final voiceUrls = <String>[
-    'referee-whistle.mp3',
-    'cat-meow.mp3',
-    'siren.mp3',
-    'morse-sos.mp3'
-  ];
 
-  final imgActive = 'assets/img/whistle-01.png';
-  final imgPassive = 'assets/img/whistle-01-noclick.png';
+  final imgActive = ConstAsset.whistlePng;
+  final imgPassive = ConstAsset.whistleNoClickPng;
 
   @override
   void initState() {
-    isStart = audioPlayer.state == AudioPlayerState.PLAYING;
     super.initState();
+    isStart = audioPlayer.state == AudioPlayerState.PLAYING;
   }
 
   Future playLocal(localFileName) async {
@@ -79,9 +87,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> voiceNames = <String>[
+      AppLocalizations.of(context).translate('audio_whistle'),
+      AppLocalizations.of(context).translate('audio_cat'),
+      AppLocalizations.of(context).translate('audio_siren'),
+      AppLocalizations.of(context).translate('audio_morse')
+    ];
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(AppLocalizations.of(context).translate('appName')),
       ),
       body: Center(
         child: Column(
@@ -95,14 +109,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: isStart ? Colors.grey : Colors.red,
                 onPressed: () => setState(() {
                   isStart = !isStart;
-                  playLocal(voiceUrls[selectedVoiceIndex])
+                  playLocal(ConstVoice.getAll[selectedVoiceIndex])
                       .then((value) => (null));
                 }),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(isStart ? imgActive : imgPassive, width: 160),
-                    Text("S.O.S", style: TextStyle(color: Colors.white))
+                    Text(AppLocalizations.of(context).translate('sos'),
+                        style: TextStyle(color: Colors.white))
                   ],
                 ),
               ),
@@ -121,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   setState(() {
                     selectedVoiceIndex = voiceNames.indexOf(value);
                     isStart = false;
-                    playLocal(voiceUrls[selectedVoiceIndex])
+                    playLocal(ConstVoice.getAll[selectedVoiceIndex])
                         .then((value) => (null));
                   });
                 },
@@ -129,13 +144,16 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Text(
-              '\n\nYardım için düdüğe basın.\nDurdurmak için tekrar basın.',
+              '\n\n' +
+                  AppLocalizations.of(context).translate('pressForHelp') +
+                  '\n' +
+                  AppLocalizations.of(context).translate('pressForStop'),
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
             ),
             Padding(padding: EdgeInsets.only(top: 50.0)),
             Text(
-              "© 2020 Osman KOÇ",
+              AppLocalizations.of(context).translate('copyright'),
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.black87,

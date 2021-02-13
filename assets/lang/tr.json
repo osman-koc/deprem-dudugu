@@ -1,0 +1,11 @@
+{
+    "appName": "Deprem Düdüğü",
+    "audio_whistle": "Düdük sesi",
+    "audio_cat": "Kedi sesi",
+    "audio_siren": "Siren sesi",
+    "audio_morse": "Mors alfabesi yardım sesi",
+    "pressForHelp": "Yardım için düdüğe basın.",
+    "pressForStop": "Durdurmak için tekrar basın.",
+    "sos": "S.O.S",
+    "copyright": "© 2021 Osman KOÇ \n osmkoc.com"
+}
