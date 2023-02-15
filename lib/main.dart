@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:DepremDudugu/constants/const_asset.dart';
-import 'package:DepremDudugu/constants/const_voice.dart';
+import 'package:depremdudugu/constants/const_asset.dart';
+import 'package:depremdudugu/constants/const_voice.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -34,7 +34,8 @@ class MyApp extends StatelessWidget {
       ],
       localeResolutionCallback: (locale, supportedLocales) {
         for (var supportedLocale in supportedLocales) {
-          if (supportedLocale.languageCode == locale.languageCode &&
+          if (locale != null &&
+              supportedLocale.languageCode == locale.languageCode &&
               supportedLocale.countryCode == locale.countryCode) {
             return supportedLocale;
           }
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+  MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -65,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    isStart = audioPlayer.state == AudioPlayerState.PLAYING;
+    isStart = audioPlayer.state == PlayerState.playing;
   }
 
   Future playLocal(localFileName) async {
@@ -79,23 +80,35 @@ class _MyHomePageState extends State<MyHomePage> {
         final bytes = soundData.buffer.asUint8List();
         await file.writeAsBytes(bytes, flush: true);
       }
-      await audioPlayer.setUrl(file.path, isLocal: true);
-      await audioPlayer.setReleaseMode(ReleaseMode.LOOP);
+      await audioPlayer.setSourceUrl(file.path);
+      await audioPlayer.setReleaseMode(ReleaseMode.loop);
       await audioPlayer.resume();
     }
+  }
+
+  ButtonStyle getRaisedButtonStyle({required Color btnTextColor}) {
+    return ElevatedButton.styleFrom(
+      foregroundColor: btnTextColor,
+      //backgroundColor: Colors.grey[300],
+      minimumSize: Size(88, 36),
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(2)),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     List<String> voiceNames = <String>[
-      AppLocalizations.of(context).translate('audio_whistle'),
-      AppLocalizations.of(context).translate('audio_cat'),
-      AppLocalizations.of(context).translate('audio_siren'),
-      AppLocalizations.of(context).translate('audio_morse')
+      AppLocalizations.of(context).translate(key: 'audio_whistle'),
+      AppLocalizations.of(context).translate(key: 'audio_cat'),
+      AppLocalizations.of(context).translate(key: 'audio_siren'),
+      AppLocalizations.of(context).translate(key: 'audio_morse')
     ];
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context).translate('appName')),
+        title: Text(AppLocalizations.of(context).translate(key: 'appName')),
       ),
       body: Center(
         child: Column(
@@ -105,8 +118,11 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: EdgeInsets.all(40.0),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100)),
-              child: RaisedButton(
-                color: isStart ? Colors.grey : Colors.red,
+              child: ElevatedButton(
+                //color: isStart ? Colors.grey : Colors.red,
+                style: getRaisedButtonStyle(
+                  btnTextColor: isStart ? Colors.grey : Colors.red,
+                ),
                 onPressed: () => setState(() {
                   isStart = !isStart;
                   playLocal(ConstVoice.getAll[selectedVoiceIndex])
@@ -116,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(isStart ? imgActive : imgPassive, width: 160),
-                    Text(AppLocalizations.of(context).translate('sos'),
+                    Text(AppLocalizations.of(context).translate(key: 'sos'),
                         style: TextStyle(color: Colors.white))
                   ],
                 ),
@@ -134,7 +150,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 }).toList(),
                 onChanged: (value) {
                   setState(() {
-                    selectedVoiceIndex = voiceNames.indexOf(value);
+                    selectedVoiceIndex = voiceNames.indexOf(value!);
                     isStart = false;
                     playLocal(ConstVoice.getAll[selectedVoiceIndex])
                         .then((value) => (null));
@@ -145,15 +161,15 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '\n\n' +
-                  AppLocalizations.of(context).translate('pressForHelp') +
+                  AppLocalizations.of(context).translate(key: 'pressForHelp') +
                   '\n' +
-                  AppLocalizations.of(context).translate('pressForStop'),
+                  AppLocalizations.of(context).translate(key: 'pressForStop'),
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
             ),
             Padding(padding: EdgeInsets.only(top: 50.0)),
             Text(
-              AppLocalizations.of(context).translate('copyright'),
+              AppLocalizations.of(context).translate(key: 'copyright'),
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.black87,

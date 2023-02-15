@@ -2,7 +2,7 @@
 
 Depremde enkaz altında veya asansörde kalma gibi durumlarda sesinizi duyurmak için düdük sesi çalmaya yarayan mobil uygulamadır.
 
-- [Download: Google Play Store](https://play.google.com/store/apps/details?id=com.osmankoc.DepremDudugu)
+- [Download: Google Play Store](https://play.google.com/store/apps/details?id=com.osmankoc.depremdudugu)
 
 <div class="row">
   <img src="https://play-lh.googleusercontent.com/Oy5Z6hb7Q-IUd83TGTGD8RZlGGacijXCq_k05hlHoBa-a3iNBAa9IsL02xaif_eECYtP=w1536-h722-rw" width="200" />
