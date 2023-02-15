@@ -55,7 +55,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var isStart = false;
+  static bool isStart = false;
   var audioPlayer = new AudioPlayer();
 
   int selectedVoiceIndex = 0;
@@ -86,14 +86,15 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  ButtonStyle getRaisedButtonStyle({required Color btnTextColor}) {
+  static ButtonStyle getRaisedButtonStyle({required bool playerIsStart}) {
     return ElevatedButton.styleFrom(
-      foregroundColor: btnTextColor,
+      //foregroundColor: playerIsStart ? Colors.grey : Colors.red,
+      backgroundColor: playerIsStart ? Colors.grey : Colors.red,
       //backgroundColor: Colors.grey[300],
       minimumSize: Size(88, 36),
       padding: EdgeInsets.symmetric(horizontal: 16),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(2)),
+        borderRadius: BorderRadius.all(Radius.circular(64)),
       ),
     );
   }
@@ -120,9 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   borderRadius: BorderRadius.circular(100)),
               child: ElevatedButton(
                 //color: isStart ? Colors.grey : Colors.red,
-                style: getRaisedButtonStyle(
-                  btnTextColor: isStart ? Colors.grey : Colors.red,
-                ),
+                style: getRaisedButtonStyle(playerIsStart: isStart),
                 onPressed: () => setState(() {
                   isStart = !isStart;
                   playLocal(ConstVoice.getAll[selectedVoiceIndex])
@@ -132,8 +131,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(isStart ? imgActive : imgPassive, width: 160),
-                    Text(AppLocalizations.of(context).translate(key: 'sos'),
-                        style: TextStyle(color: Colors.white))
+                    Text(
+                      AppLocalizations.of(context).translate(key: 'sos'),
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    Text(' ')
                   ],
                 ),
               ),
