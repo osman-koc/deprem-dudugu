@@ -17,11 +17,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Deprem Düdüğü', //TODO
+      title: 'Whistle',
       theme: ThemeData(
         primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      darkTheme: ThemeData.dark(),
+      themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       supportedLocales: [
         Locale('en', 'US'),
@@ -31,6 +33,7 @@ class MyApp extends StatelessWidget {
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
       ],
       localeResolutionCallback: (locale, supportedLocales) {
         for (var supportedLocale in supportedLocales) {
@@ -99,6 +102,12 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  bool isDarkMode(BuildContext context) {
+    var brightness = MediaQuery.of(context).platformBrightness;
+    bool isDarkMode = brightness == Brightness.dark;
+    return isDarkMode;
+  }
+
   @override
   Widget build(BuildContext context) {
     List<String> voiceNames = <String>[
@@ -119,7 +128,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ButtonTheme(
               padding: EdgeInsets.all(40.0),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100)),
+                borderRadius: BorderRadius.circular(100),
+              ),
               child: ElevatedButton(
                 //color: isStart ? Colors.grey : Colors.red,
                 style: getRaisedButtonStyle(playerIsStart: isStart),
@@ -159,7 +169,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         .then((value) => (null));
                   });
                 },
-                style: TextStyle(color: Colors.black87, fontSize: 20),
+                style: TextStyle(
+                  color: isDarkMode(context) ? Colors.white : Colors.black87,
+                  fontSize: 20,
+                ),
               ),
             ),
             Text(
@@ -175,7 +188,7 @@ class _MyHomePageState extends State<MyHomePage> {
               AppLocalizations.of(context).translate(key: 'copyright'),
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.black87,
+                //color: Colors.black87,
                 fontSize: 10.0,
               ),
             ),
