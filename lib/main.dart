@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Deprem Düdüğü',
+      title: 'Deprem Düdüğü', //TODO
       theme: ThemeData(
         primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -105,6 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
       AppLocalizations.of(context).translate(key: 'audio_whistle'),
       AppLocalizations.of(context).translate(key: 'audio_cat'),
       AppLocalizations.of(context).translate(key: 'audio_siren'),
+      AppLocalizations.of(context).translate(key: 'audio_hammer'),
       AppLocalizations.of(context).translate(key: 'audio_morse')
     ];
     return Scaffold(
