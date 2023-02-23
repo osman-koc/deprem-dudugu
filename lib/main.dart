@@ -73,9 +73,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future playLocal(localFileName) async {
-    if (!isStart) {
-      await audioPlayer.stop();
-    } else {
+    await audioPlayer.stop();
+
+    if (isStart) {
       final dir = await getApplicationDocumentsDirectory();
       final file = new File("${dir.path}/$localFileName");
       if (!(await file.exists())) {
