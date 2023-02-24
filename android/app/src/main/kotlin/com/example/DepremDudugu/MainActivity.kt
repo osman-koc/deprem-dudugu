@@ -1,4 +1,4 @@
-package com.osmankoc.depremdudugu
+package com.osmankoc.DepremDudugu
 
 import io.flutter.embedding.android.FlutterActivity
 
