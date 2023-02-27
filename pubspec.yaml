@@ -1,22 +1,23 @@
-name: DepremDudugu
-description: Yardım için düdük çalar.
+name: depremdudugu
+description: Whistle (S.O.S)
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 1.3.0+5
+version: 2.0.0+7
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=2.19.0-146.2.beta <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  audioplayers: ^0.16.2
-  cupertino_icons: ^1.0.0
-  flutter_launcher_icons: ^0.8.1
-  path_provider: ^1.6.24
+  audioplayers: ^3.0.1
+  cupertino_icons: ^1.0.5
+  flutter_launcher_icons: ^0.11.0
+  path_provider: ^2.0.12
+  flutter_countdown_timer: ^4.1.0
 
 dev_dependencies:
   flutter_test:

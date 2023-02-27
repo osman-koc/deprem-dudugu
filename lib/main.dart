@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:DepremDudugu/constants/const_asset.dart';
-import 'package:DepremDudugu/constants/const_voice.dart';
+import 'package:depremdudugu/constants/const_asset.dart';
+import 'package:depremdudugu/constants/const_voice.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -17,11 +17,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Deprem Düdüğü',
+      title: 'Whistle',
       theme: ThemeData(
         primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      darkTheme: ThemeData.dark(),
+      themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       supportedLocales: [
         Locale('en', 'US'),
@@ -31,10 +33,12 @@ class MyApp extends StatelessWidget {
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
       ],
       localeResolutionCallback: (locale, supportedLocales) {
         for (var supportedLocale in supportedLocales) {
-          if (supportedLocale.languageCode == locale.languageCode &&
+          if (locale != null &&
+              supportedLocale.languageCode == locale.languageCode &&
               supportedLocale.countryCode == locale.countryCode) {
             return supportedLocale;
           }
@@ -47,14 +51,14 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+  MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var isStart = false;
+  static bool isStart = false;
   var audioPlayer = new AudioPlayer();
 
   int selectedVoiceIndex = 0;
@@ -65,13 +69,13 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    isStart = audioPlayer.state == AudioPlayerState.PLAYING;
+    isStart = audioPlayer.state == PlayerState.playing;
   }
 
   Future playLocal(localFileName) async {
-    if (!isStart) {
-      await audioPlayer.stop();
-    } else {
+    await audioPlayer.stop();
+
+    if (isStart) {
       final dir = await getApplicationDocumentsDirectory();
       final file = new File("${dir.path}/$localFileName");
       if (!(await file.exists())) {
@@ -79,23 +83,43 @@ class _MyHomePageState extends State<MyHomePage> {
         final bytes = soundData.buffer.asUint8List();
         await file.writeAsBytes(bytes, flush: true);
       }
-      await audioPlayer.setUrl(file.path, isLocal: true);
-      await audioPlayer.setReleaseMode(ReleaseMode.LOOP);
+      await audioPlayer.setSourceUrl(file.path);
+      await audioPlayer.setReleaseMode(ReleaseMode.loop);
       await audioPlayer.resume();
     }
+  }
+
+  static ButtonStyle getRaisedButtonStyle({required bool playerIsStart}) {
+    return ElevatedButton.styleFrom(
+      //foregroundColor: playerIsStart ? Colors.grey : Colors.red,
+      backgroundColor: playerIsStart ? Colors.grey : Colors.red,
+      //backgroundColor: Colors.grey[300],
+      minimumSize: Size(88, 36),
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(64)),
+      ),
+    );
+  }
+
+  bool isDarkMode(BuildContext context) {
+    var brightness = MediaQuery.of(context).platformBrightness;
+    bool isDarkMode = brightness == Brightness.dark;
+    return isDarkMode;
   }
 
   @override
   Widget build(BuildContext context) {
     List<String> voiceNames = <String>[
-      AppLocalizations.of(context).translate('audio_whistle'),
-      AppLocalizations.of(context).translate('audio_cat'),
-      AppLocalizations.of(context).translate('audio_siren'),
-      AppLocalizations.of(context).translate('audio_morse')
+      AppLocalizations.of(context).translate(key: 'audio_whistle'),
+      AppLocalizations.of(context).translate(key: 'audio_cat'),
+      AppLocalizations.of(context).translate(key: 'audio_siren'),
+      AppLocalizations.of(context).translate(key: 'audio_hammer'),
+      AppLocalizations.of(context).translate(key: 'audio_morse')
     ];
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context).translate('appName')),
+        title: Text(AppLocalizations.of(context).translate(key: 'appName')),
       ),
       body: Center(
         child: Column(
@@ -104,9 +128,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ButtonTheme(
               padding: EdgeInsets.all(40.0),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100)),
-              child: RaisedButton(
-                color: isStart ? Colors.grey : Colors.red,
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: ElevatedButton(
+                //color: isStart ? Colors.grey : Colors.red,
+                style: getRaisedButtonStyle(playerIsStart: isStart),
                 onPressed: () => setState(() {
                   isStart = !isStart;
                   playLocal(ConstVoice.getAll[selectedVoiceIndex])
@@ -116,8 +142,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(isStart ? imgActive : imgPassive, width: 160),
-                    Text(AppLocalizations.of(context).translate('sos'),
-                        style: TextStyle(color: Colors.white))
+                    Text(
+                      AppLocalizations.of(context).translate(key: 'sos'),
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    Text(' ')
                   ],
                 ),
               ),
@@ -134,29 +163,32 @@ class _MyHomePageState extends State<MyHomePage> {
                 }).toList(),
                 onChanged: (value) {
                   setState(() {
-                    selectedVoiceIndex = voiceNames.indexOf(value);
+                    selectedVoiceIndex = voiceNames.indexOf(value!);
                     isStart = false;
                     playLocal(ConstVoice.getAll[selectedVoiceIndex])
                         .then((value) => (null));
                   });
                 },
-                style: TextStyle(color: Colors.black87, fontSize: 20),
+                style: TextStyle(
+                  color: isDarkMode(context) ? Colors.white : Colors.black87,
+                  fontSize: 20,
+                ),
               ),
             ),
             Text(
               '\n\n' +
-                  AppLocalizations.of(context).translate('pressForHelp') +
+                  AppLocalizations.of(context).translate(key: 'pressForHelp') +
                   '\n' +
-                  AppLocalizations.of(context).translate('pressForStop'),
+                  AppLocalizations.of(context).translate(key: 'pressForStop'),
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
             ),
             Padding(padding: EdgeInsets.only(top: 50.0)),
             Text(
-              AppLocalizations.of(context).translate('copyright'),
+              AppLocalizations.of(context).translate(key: 'copyright'),
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.black87,
+                //color: Colors.black87,
                 fontSize: 10.0,
               ),
             ),

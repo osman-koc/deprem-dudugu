@@ -1,6 +1,10 @@
-# Deprem Düdüğü (Whistle)
+# Deprem Düdüğü / Whistle
 
+### TR
 Depremde enkaz altında veya asansörde kalma gibi durumlarda sesinizi duyurmak için düdük sesi çalmaya yarayan mobil uygulamadır.
+
+### EN
+It is a mobile application that plays a whistle to make your voice heard in situations such as being under debris or in an elevator during an earthquake.
 
 - [Download: Google Play Store](https://play.google.com/store/apps/details?id=com.osmankoc.DepremDudugu)
 
@@ -10,11 +14,15 @@ Depremde enkaz altında veya asansörde kalma gibi durumlarda sesinizi duyurmak 
   <img src="https://play-lh.googleusercontent.com/C5NwNaI2A0dbEmzEkj2SBlx4skTRhK0PF7NnBQN5V7e8GRnTiRQIAbx5UlIIZrCxfw4=w1536-h722-rw" width="200" />
 </div>
 
-## Teknik
+## Teknik / Tech
 
+### TR
 Proje, Flutter (Dart) ile geliştirilmiştir.
-
 Kaynak linkler aşağıdaki gibidir.
+
+### EN
+The project was developed with Flutter (Dart).
+Source links are as follows.
 
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
@@ -23,13 +31,13 @@ Kaynak linkler aşağıdaki gibidir.
 - [Audio Players](https://pub.dev/packages/audioplayers)
 - [Path Provider](https://pub.dev/packages/path_provider)
 
-## Gereksinimler
+## Gereksinimler / Requirements
 - [VS Code](https://code.visualstudio.com)
 - [Flutter](https://flutter.dev/docs/get-started/install)
 - [Dart SDK](https://dart.dev/get-dart)
 - [Android Studio Emulator](https://developer.android.com/studio#downloads)
 
-### Projeyi Çalıştırma
+### Projeyi Çalıştırma / Running the Project
 
 VS Code terminal:
 - flutter pub get
