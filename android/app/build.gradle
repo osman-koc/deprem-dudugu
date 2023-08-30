@@ -32,8 +32,8 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    //compileSdkVersion 31
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 33
+    //compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -51,10 +51,10 @@ android {
 
     defaultConfig {
         applicationId "com.osmankoc.DepremDudugu"
-        //minSdkVersion 26
-        //targetSdkVersion 31
-        minSdkVersion flutter.minSdkVersion
-        targetSdkVersion flutter.targetSdkVersion
+        minSdkVersion 31
+        //minSdkVersion flutter.minSdkVersion
+        targetSdkVersion 33
+        //targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
