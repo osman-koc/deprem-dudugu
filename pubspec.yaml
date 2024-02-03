@@ -1,23 +1,26 @@
 name: depremdudugu
 description: Whistle (S.O.S)
 
-publish_to: "none" # Remove this line if you wish to publish to pub.dev
+publish_to: "none"
 
-version: 3.0.0+9
+version: 3.1.0+10
 
 environment:
-  sdk: '>=2.19.0-146.2.beta <3.0.0'
+  sdk: ">=3.2.6 <4.0.0"
 
 dependencies:
+  audioplayers: ^5.2.1
+  cupertino_icons: ^1.0.6
   flutter:
     sdk: flutter
+  flutter_countdown_timer: ^4.1.0
+  flutter_launcher_icons: ^0.13.1
   flutter_localizations:
     sdk: flutter
-  audioplayers: ^3.0.1
-  cupertino_icons: ^1.0.5
-  flutter_launcher_icons: ^0.11.0
-  path_provider: ^2.0.12
-  flutter_countdown_timer: ^4.1.0
+  package_info_plus: ^5.0.1
+  path_provider: ^2.1.2
+  simple_speed_dial: ^0.1.7
+  url_launcher: ^6.2.4
 
 dev_dependencies:
   flutter_test:

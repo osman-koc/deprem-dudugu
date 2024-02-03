@@ -1,12 +1,19 @@
 {
-    "appName": "Deprem Düdüğü",
+    "app_name": "Deprem Düdüğü",
+    "app_developer": "Osman Koç",
+    "app_website": "www.osmkoc.com",
+    "app_email": "info@osmkoc.com",
+    "about": "Hakkında",
+    "about_app_title": "Uygulama Hakkında",
+    "developedby": "Geliştiren",
+    "contact": "İletişim",
+    "close": "Kapat",
     "audio_whistle": "Düdük sesi",
     "audio_cat": "Kedi sesi",
     "audio_siren": "Siren sesi",
     "audio_hammer": "Çekiç sesi",
     "audio_morse": "Mors alfabesi yardım sesi",
-    "pressForHelp": "Yardım için düdüğe basın.",
-    "pressForStop": "Durdurmak için tekrar basın.",
-    "sos": "S.O.S",
-    "copyright": "© 2021 Osman KOÇ \n osmkoc.com"
+    "press_for_help": "Yardım için düdüğe basın.",
+    "press_for_stop": "Durdurmak için tekrar basın.",
+    "sos": "S.O.S"
 }

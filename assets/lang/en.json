@@ -1,12 +1,19 @@
 {
-    "appName": "Whistle",
+    "app_name": "Whistle S.O.S",
+    "app_developer": "Osman Koç",
+    "app_website": "www.osmkoc.com",
+    "app_email": "info@osmkoc.com",
+    "about": "About",
+    "about_app_title": "About App",
+    "developedby": "Developed by",
+    "contact": "Contact",
+    "close": "Close",
     "audio_whistle": "Whistle",
     "audio_cat": "Cat",
     "audio_siren": "Siren",
     "audio_hammer": "Hammer",
     "audio_morse": "Morse",
-    "pressForHelp": "Press the whistle for help.",
-    "pressForStop": "Press it again to stop.",
-    "sos": "S.O.S",
-    "copyright": "© 2021 Osman KOÇ \n osmkoc.com"
+    "press_for_help": "Press the whistle for help.",
+    "press_for_stop": "Press it again to stop.",
+    "sos": "S.O.S"
 }

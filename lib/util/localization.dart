@@ -9,18 +9,19 @@ class AppLocalizations {
   AppLocalizations(this.locale);
 
   static AppLocalizations of(BuildContext context) {
-    var localeOf = Localizations.of<AppLocalizations>(context, AppLocalizations);
-    if(localeOf != null){
+    var localeOf =
+        Localizations.of<AppLocalizations>(context, AppLocalizations);
+    if (localeOf != null) {
       return localeOf;
-    } else{
-      return new AppLocalizations(new Locale('tr', 'TR'));
+    } else {
+      return AppLocalizations(const Locale('tr', 'TR'));
     }
   }
 
   static const LocalizationsDelegate<AppLocalizations> delegate =
       _AppLocalizationsDelegate();
 
-  Map<String, String> _localizedStrings = new Map<String, String>();
+  Map<String, String> _localizedStrings = <String, String>{};
 
   Future<bool> load() async {
     String jsonString =
@@ -51,7 +52,7 @@ class _AppLocalizationsDelegate
 
   @override
   Future<AppLocalizations> load(Locale locale) async {
-    AppLocalizations localizations = new AppLocalizations(locale);
+    var localizations = AppLocalizations(locale);
     await localizations.load();
     return localizations;
   }
