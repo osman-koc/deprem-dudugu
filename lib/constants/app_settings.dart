@@ -12,8 +12,8 @@ class AppSettings {
   );
 
   static const List<Locale> supportedLocales = [
-    Locale('tr', 'TR'),
-    Locale('en', 'US'),
+    Locale('en'),
+    Locale('tr'),
   ];
 
   static const List<LocalizationsDelegate> localizationsDelegates = [
@@ -24,12 +24,9 @@ class AppSettings {
   ];
 
   static Locale? localeResolutionCallback(locale, supportedLocales) {
-    for (var supportedLocale in supportedLocales) {
-      if (locale != null &&
-          supportedLocale.languageCode == locale.languageCode &&
-          supportedLocale.countryCode == locale.countryCode) {
-        return supportedLocale;
-      }
+    if (locale != null){
+      final currentLocale = supportedLocales.firstWhere((x) => x.languageCode == locale.languageCode);
+      if (currentLocale != null) return currentLocale;
     }
     return supportedLocales.first;
   }
