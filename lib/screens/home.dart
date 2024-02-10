@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:depremdudugu/constants/app_colors.dart';
 import 'package:depremdudugu/constants/const_asset.dart';
 import 'package:depremdudugu/constants/const_voice.dart';
@@ -7,8 +5,6 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:depremdudugu/extensions/app_lang.dart';
 import 'package:depremdudugu/screens/about_popup.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
-import 'package:path_provider/path_provider.dart';
 import 'package:simple_speed_dial/simple_speed_dial.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -37,14 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
     await audioPlayer.stop();
 
     if (isStart) {
-      final dir = await getApplicationDocumentsDirectory();
-      final file = new File("${dir.path}/$localFileName");
-      if (!(await file.exists())) {
-        final soundData = await rootBundle.load("assets/audios/$localFileName");
-        final bytes = soundData.buffer.asUint8List();
-        await file.writeAsBytes(bytes, flush: true);
-      }
-      await audioPlayer.setSourceUrl(file.path);
+      var assetPath = "audios/$localFileName";
+      var assetSrc = AssetSource(assetPath);
+      await audioPlayer.play(assetSrc);
       await audioPlayer.setReleaseMode(ReleaseMode.loop);
       await audioPlayer.resume();
     }
