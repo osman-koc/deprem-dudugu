@@ -6,14 +6,6 @@ class AppLangTranslations {
 
   AppLangTranslations(this._appLocalizations);
 
-  List<String> audioNames() => [
-        this.audioWhistle,
-        this.audioCat,
-        this.audioSiren,
-        this.audioHammer,
-        this.audioMorse,
-      ];
-
   String get appName => _appLocalizations.translate(key: 'app_name');
   String get appDeveloper => _appLocalizations.translate(key: 'app_developer');
   String get appWebsite => _appLocalizations.translate(key: 'app_website');
@@ -32,6 +24,17 @@ class AppLangTranslations {
   String get pressForHelp => _appLocalizations.translate(key: 'press_for_help');
   String get pressForStop => _appLocalizations.translate(key: 'press_for_stop');
   String get sos => _appLocalizations.translate(key: 'sos');
+
+  String get setTimer => _appLocalizations.translate(key: 'set_timer');
+  String get reset => _appLocalizations.translate(key: 'reset');
+  String get ok => _appLocalizations.translate(key: 'ok');
+  String get cancel => _appLocalizations.translate(key: 'cancel');
+  String get buttonTextStop =>
+      _appLocalizations.translate(key: 'buttonTextStop');
+  String get buttonTextPlay =>
+      _appLocalizations.translate(key: 'buttonTextPlay');
+  String get timerExpireText =>
+      _appLocalizations.translate(key: 'timer_expire_text');
 }
 
 extension AppLangContextExtension on BuildContext {

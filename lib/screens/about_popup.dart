@@ -71,7 +71,7 @@ class AboutScreenPopup extends StatelessWidget {
               text: TextSpan(
                 text: context.translate.appWebsite,
                 style:
-                    TextStyle(fontSize: 14, color: AppColors(context).tdBlue),
+                    TextStyle(fontSize: 14, color: AppColors(context).appBlue),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     var webUri =
@@ -87,7 +87,7 @@ class AboutScreenPopup extends StatelessWidget {
               text: TextSpan(
                 text: context.translate.appMail,
                 style:
-                    TextStyle(fontSize: 14, color: AppColors(context).tdBlue),
+                    TextStyle(fontSize: 14, color: AppColors(context).appBlue),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     var webUri =

@@ -15,5 +15,12 @@
     "audio_morse": "Morse",
     "press_for_help": "Press the whistle for help.",
     "press_for_stop": "Press it again to stop.",
-    "sos": "S.O.S"
+    "sos": "S.O.S",
+    "set_timer": "Set Timer",
+    "reset": "Reset",
+    "ok": "OK",
+    "cancel": "Cancel",
+    "buttonTextPlay": "Play",
+    "buttonTextStop": "Stop",
+    "timer_expire_text": "The current time has expired."
 }

@@ -15,5 +15,12 @@
     "audio_morse": "Mors alfabesi yardım sesi",
     "press_for_help": "Yardım için düdüğe basın.",
     "press_for_stop": "Durdurmak için tekrar basın.",
-    "sos": "S.O.S"
+    "sos": "S.O.S",
+    "set_timer": "Zaman Ayarı",
+    "reset": "Sıfırla",
+    "ok": "Tamam",
+    "cancel": "İptal",
+    "buttonTextPlay": "Başlat",
+    "buttonTextStop": "Durdur",
+    "timer_expire_text": "Ayarlanan süre tamamlandı."
 }

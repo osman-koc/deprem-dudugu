@@ -16,6 +16,7 @@ dependencies:
   flutter_countdown_timer: ^4.1.0
   flutter_localizations:
     sdk: flutter
+  number_inc_dec: ^0.8.0
   package_info_plus: ^5.0.1
   path_provider: ^2.1.2
   simple_speed_dial: ^0.1.7
