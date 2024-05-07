@@ -7,6 +7,7 @@ Depremde enkaz altında veya asansörde kalma gibi durumlarda sesinizi duyurmak 
 It is a mobile application that plays a whistle to make your voice heard in situations such as being under debris or in an elevator during an earthquake. It automatically adjusts the light or dark theme according to your phone's setting.
 
 - [Download: Google Play Store](https://play.google.com/store/apps/details?id=com.osmankoc.DepremDudugu)
+- [Download: AppStore](https://apps.apple.com/tr/app/whistle-s-o-s/id6477729209)
 
 ## Ekran Görüntüleri / Screenshots
 

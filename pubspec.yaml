@@ -3,7 +3,7 @@ description: Whistle (S.O.S)
 
 publish_to: "none"
 
-version: 3.3.0+12
+version: 3.3.0+13
 
 environment:
   sdk: ">=3.2.6 <4.0.0"
